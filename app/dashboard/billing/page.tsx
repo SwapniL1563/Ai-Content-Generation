@@ -14,14 +14,21 @@ const billing = () => {
   const{user} = useUser();
    const {userSubscription,setUserSubscription} = useContext(UserSubscriptionContext)
 
-  const onPaymentSubscr =()=> {
-      axios.post('/api/create-subscription',{})
-      .then(resp=>{ console.log(resp.data)
-        onPayment(resp.data.id)
-      }),(error)=>{
-        setLoading(false);
-      }
-  }
+   const onPaymentSubscr = () => {
+    axios
+      .post('/api/create-subscription', {})
+      .then(
+        (resp) => {
+          console.log(resp.data);
+          onPayment(resp.data.id);
+        },
+        (error: unknown) => {
+          console.error("Error during payment subscription:", error);
+          setLoading(false);
+        }
+      );
+  };
+  
 
   const onPayment = (subId:string)=> {
     const options = {
