@@ -55,17 +55,23 @@ const CreateNewContent = () => {
     setUpdateCreditUsage(Date.now());
   };
 
-  const SaveInDb = async (formData: any, slug: any, aiOutput: string) => {
+  const SaveInDb = async (formData: any, slug: string | undefined, aiOutput: string | undefined) => {
+    if (!slug || !aiOutput) {
+      console.error("Required fields are missing");
+      return;
+    }
+  
     const result = await db.insert(AIOutput).values({
-      formData: formData,
+      formData: formData || '', // Fallback to an empty string if formData is undefined
       templateSlug: slug,
       aiResponse: aiOutput,
-      createdBy: user?.primaryEmailAddress?.emailAddress,
+      createdBy: user?.primaryEmailAddress?.emailAddress || 'Unknown',
       createdAt: moment().format("DD/MM/yyyy"),
     });
-
-    console.log(result);
+  
+    // console.log(result);
   };
+  
 
   return (
     <div className="p-10">
