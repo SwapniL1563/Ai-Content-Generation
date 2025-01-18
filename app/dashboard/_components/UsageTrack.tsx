@@ -38,20 +38,26 @@ const UsageTrack = () => {
     }
 
     const isUserSub = async () => {
-       const result = await db.select().from(UserSubscription)
-       .where(eq(UserSubscription.email,user?.primaryEmailAddress?.emailAddress));
-
-       if(result){
+      if (!user?.primaryEmailAddress?.emailAddress) {
+        console.error("User email is undefined.");
+        return;
+      }
+    
+      const result = await db.select().from(UserSubscription)
+        .where(eq(UserSubscription.email, user.primaryEmailAddress.emailAddress));
+    
+      if (result.length > 0) {
         setUserSubscription(true);
         setMaxWords(100000);
-       }
-    }
+      }
+    };
 
     const GetTotalUsage = (result:HISTORY[]) => {
        let total:number = 0;
        result.forEach(element => {
         total = total+Number(element.aiResponse?.length)
-        setTotalUsage(total);
+        setTotalUsage(total)
+        console.log(total)
        }) 
     }
   return (
