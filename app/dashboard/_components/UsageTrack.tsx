@@ -56,8 +56,7 @@ const UsageTrack = () => {
        let total:number = 0;
        result.forEach(element => {
         total = total+Number(element.aiResponse?.length)
-        setTotalUsage(total)
-        console.log(total)
+        setTotalUsage(total);
        }) 
     }
   return (
