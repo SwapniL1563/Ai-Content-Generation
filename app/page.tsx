@@ -59,6 +59,13 @@ export default function Home() {
 
          </div>
       </div>
+
+      <div className=" px-10  py-10 flex justify-center items-center ">
+        <div className=" flex  flex-col justify-center items-center">
+           <h1 className="text-primary mb-2 font-semibold">Promptly - AI Content Generator</h1>
+           <h1 className="text-gray-500 text-sm">All Rights Reserved | ©2025 | Made by Swapnil</h1>
+        </div>
+      </div>
     </div>
   );
 }
